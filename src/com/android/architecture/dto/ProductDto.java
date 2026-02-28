@@ -1,0 +1,45 @@
+package com.android.architecture.dto;
+
+/**
+ * Data Transfer Object for Product data.
+ * Used for Gson/Retrofit serialization and deserialization.
+ */
+public class ProductDto {
+    private String productId;
+    private String productName;
+    private double price;
+
+    // No-argument constructor required for Gson/Retrofit deserialization
+    public ProductDto() {
+    }
+
+    public ProductDto(String productId, String productName, double price) {
+        this.productId = productId;
+        this.productName = productName;
+        this.price = price;
+    }
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+}

@@ -1,0 +1,40 @@
+package com.android.architecture.viewmodel;
+
+import com.android.architecture.repository.ProductRepository;
+
+/**
+ * ViewModel for Product-related UI data.
+ * COMPLIANT: Rule 2 - Uses Repository pattern for data access.
+ * VIOLATION: Rule 4 - Holds a Context reference, which causes memory leaks.
+ * COMPLIANT: Rule 6 - MutableLiveData is private, exposed as immutable LiveData.
+ * COMPLIANT: Rule 8 - No direct network client references.
+ */
+public class ProductViewModel extends ViewModel {
+    private ProductRepository productRepository;
+    private Context context;
+    private MutableLiveData<Object> productData = new MutableLiveData<>();
+    private MutableLiveData<List<Object>> productListData = new MutableLiveData<>();
+
+    public ProductViewModel(Context context) {
+        this.productRepository = new ProductRepository();
+        this.context = context;
+    }
+
+    public LiveData<Object> getProductData() {
+        return productData;
+    }
+
+    public LiveData<List<Object>> getProductListData() {
+        return productListData;
+    }
+
+    public void loadProduct(String productId) {
+        Object product = productRepository.getProductById(productId);
+        productData.setValue(product);
+    }
+
+    public void loadAllProducts() {
+        List<Object> products = productRepository.getAllProducts();
+        productListData.setValue(products);
+    }
+}

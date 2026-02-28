@@ -1,0 +1,42 @@
+[
+  {
+    "ID": "0",
+    "tagName": "DTO",
+    "detail": "Rules about Data Transfer Objects (DTOs) used for serialization and deserialization with Gson, Retrofit, and network APIs. DTOs carry data between processes and must follow conventions required by serialization libraries."
+  },
+  {
+    "ID": "1",
+    "tagName": "Repository",
+    "detail": "Rules about the Repository pattern for data access. Repositories abstract the data layer and provide a clean API for data access to the rest of the application, mediating between different data sources (network, cache, database)."
+  },
+  {
+    "ID": "2",
+    "tagName": "Room",
+    "detail": "Rules about Room Persistence Library usage, including @Entity, @Dao, @PrimaryKey, and database configuration. Room provides an abstraction layer over SQLite and requires specific annotations for compile-time verification."
+  },
+  {
+    "ID": "3",
+    "tagName": "ViewModel",
+    "detail": "Rules about Android ViewModel classes and their lifecycle management. ViewModels store and manage UI-related data in a lifecycle-conscious way, surviving configuration changes like screen rotations."
+  },
+  {
+    "ID": "4",
+    "tagName": "Architecture",
+    "detail": "General Android architecture rules covering MVVM patterns, separation of concerns, and clean architecture principles. These rules enforce best practices recommended by Android's official architecture guidelines."
+  },
+  {
+    "ID": "5",
+    "tagName": "LiveData",
+    "detail": "Rules about LiveData usage in Android architecture. LiveData is a lifecycle-aware observable data holder. Proper encapsulation requires exposing immutable LiveData to observers while keeping mutable versions private within ViewModels."
+  },
+  {
+    "ID": "6",
+    "tagName": "CleanArchitecture",
+    "detail": "Rules about Clean Architecture patterns including Use Cases (Interactors). Use Cases encapsulate a single piece of business logic and should follow the Single Responsibility Principle with a clear entry point."
+  },
+  {
+    "ID": "7",
+    "tagName": "Networking",
+    "detail": "Rules about network layer separation. Network calls (Retrofit, OkHttp, HttpURLConnection) should be isolated in Repository or data-source classes, never invoked directly from ViewModels or UI components."
+  }
+]

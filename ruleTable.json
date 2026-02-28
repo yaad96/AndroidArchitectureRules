@@ -1,0 +1,166 @@
+[
+  {
+    "index": "1",
+    "title": "DTOs must have a no-argument constructor",
+    "description": "IF a class is a DTO (Data Transfer Object)\nTHEN it must have a no-argument constructor.\nGson and Retrofit use reflection to instantiate DTOs during deserialization. Without a no-arg constructor, deserialization will fail at runtime with an InstantiationException.",
+    "tags": [
+      "DTO",
+      "Architecture"
+    ],
+    "quantifierXPathQuery": [
+      "//src:unit/src:class[contains(src:name/text(),\"Dto\")]"
+    ],
+    "constraintXPathQuery": [
+      "//src:unit/src:class[contains(src:name/text(),\"Dto\") and src:block/src:constructor[count(src:parameter_list/src:parameter)=0]]"
+    ],
+    "checkForFilesFolders": [
+      "src/com/android/architecture/dto"
+    ],
+    "checkForFilesFoldersConstraints": "INCLUDE",
+    "processFilesFolders": "WITHIN"
+  },
+  {
+    "index": "2",
+    "title": "ViewModels must access data through Repositories",
+    "description": "IF a class is a ViewModel\nTHEN it should have a reference to a Repository for data access.\nFollowing the MVVM architecture pattern, ViewModels should not directly access data sources (databases, network). Instead, they should delegate data operations to Repository classes which abstract the data layer.",
+    "tags": [
+      "Repository",
+      "ViewModel",
+      "Architecture"
+    ],
+    "quantifierXPathQuery": [
+      "//src:unit/src:class[src:super/src:extends/src:name/text()=\"ViewModel\"]"
+    ],
+    "constraintXPathQuery": [
+      "//src:unit/src:class[src:super/src:extends/src:name/text()=\"ViewModel\" and src:block/src:decl_stmt/src:decl/src:type/src:name[contains(text(),\"Repository\")]]"
+    ],
+    "checkForFilesFolders": [
+      "src/com/android/architecture/viewmodel"
+    ],
+    "checkForFilesFoldersConstraints": "INCLUDE",
+    "processFilesFolders": "WITHIN"
+  },
+  {
+    "index": "3",
+    "title": "Room @Entity classes must have an @PrimaryKey field",
+    "description": "IF a class is annotated with @Entity\nTHEN it must have a field annotated with @PrimaryKey.\nRoom requires every @Entity to have at least one field marked as @PrimaryKey to uniquely identify rows in the database table. Without it, the Room compiler will produce a build error.",
+    "tags": [
+      "Room",
+      "Architecture"
+    ],
+    "quantifierXPathQuery": [
+      "//src:unit/src:class[src:annotation/src:name/text()=\"Entity\"]"
+    ],
+    "constraintXPathQuery": [
+      "//src:unit/src:class[src:annotation/src:name/text()=\"Entity\" and src:block/src:decl_stmt/src:decl/src:annotation/src:name/text()=\"PrimaryKey\"]"
+    ],
+    "checkForFilesFolders": [
+      "src/com/android/architecture/data/entity"
+    ],
+    "checkForFilesFoldersConstraints": "INCLUDE",
+    "processFilesFolders": "WITHIN"
+  },
+  {
+    "index": "4",
+    "title": "ViewModels must not hold Activity or Context references",
+    "description": "IF a class extends ViewModel\nTHEN it must not have fields of type Activity or Context.\nViewModels outlive Activities and Fragments. Holding a reference to an Activity or Context in a ViewModel causes memory leaks because the ViewModel prevents the Activity from being garbage collected after it is destroyed.",
+    "tags": [
+      "ViewModel",
+      "Architecture"
+    ],
+    "quantifierXPathQuery": [
+      "//src:unit/src:class[src:super/src:extends/src:name/text()=\"ViewModel\"]"
+    ],
+    "constraintXPathQuery": [
+      "//src:unit/src:class[src:super/src:extends/src:name/text()=\"ViewModel\" and not(src:block/src:decl_stmt/src:decl/src:type/src:name[text()=\"Context\" or text()=\"Activity\"])]"
+    ],
+    "checkForFilesFolders": [
+      "src/com/android/architecture/viewmodel"
+    ],
+    "checkForFilesFoldersConstraints": "INCLUDE",
+    "processFilesFolders": "WITHIN"
+  },
+  {
+    "index": "5",
+    "title": "DAO interfaces must be annotated with @Dao",
+    "description": "IF an interface is a Data Access Object (name contains 'Dao')\nTHEN it must have the @Dao annotation.\nRoom uses the @Dao annotation to identify interfaces that define database operations. Without @Dao, Room will not generate the implementation for the interface, and database queries will not work.",
+    "tags": [
+      "Room",
+      "Architecture"
+    ],
+    "quantifierXPathQuery": [
+      "//src:unit/src:interface[contains(src:name/text(),\"Dao\")]"
+    ],
+    "constraintXPathQuery": [
+      "//src:unit/src:interface[contains(src:name/text(),\"Dao\") and src:annotation/src:name/text()=\"Dao\"]"
+    ],
+    "checkForFilesFolders": [
+      "src/com/android/architecture/data/dao"
+    ],
+    "checkForFilesFoldersConstraints": "INCLUDE",
+    "processFilesFolders": "WITHIN"
+  },
+  {
+    "index": "6",
+    "title": "LiveData must not be exposed as MutableLiveData",
+    "description": "IF a class extends ViewModel and has a public or protected field of type MutableLiveData\nTHEN it violates encapsulation.\nViewModels should expose data as immutable LiveData to observers (Activities/Fragments). The mutable version (MutableLiveData) should be kept private. This prevents UI components from accidentally modifying data they should only observe. The fix requires: (1) making the MutableLiveData field private, (2) adding a separate public LiveData getter that returns the private field, and (3) updating all external references.",
+    "tags": [
+      "LiveData",
+      "ViewModel",
+      "Architecture"
+    ],
+    "quantifierXPathQuery": [
+      "//src:unit/src:class[src:super/src:extends/src:name/text()=\"ViewModel\"]"
+    ],
+    "constraintXPathQuery": [
+      "//src:unit/src:class[src:super/src:extends/src:name/text()=\"ViewModel\" and not(src:block/src:decl_stmt/src:decl[src:type/src:name[text()=\"MutableLiveData\"] and (src:specifier/text()=\"public\" or src:specifier/text()=\"protected\")])]"
+    ],
+    "checkForFilesFolders": [
+      "src/com/android/architecture/viewmodel"
+    ],
+    "checkForFilesFoldersConstraints": "INCLUDE",
+    "processFilesFolders": "WITHIN"
+  },
+  {
+    "index": "7",
+    "title": "Use Cases must have a single execute() method",
+    "description": "IF a class is a Use Case (name contains 'UseCase')\nTHEN it must have an execute() method.\nFollowing Clean Architecture, each Use Case (Interactor) encapsulates exactly one piece of business logic. The entry point should be a clearly named execute() method. The fix requires: (1) identifying the business logic scattered across multiple public methods, (2) consolidating it into a single execute() method, (3) making helper methods private, and (4) updating all callers to use execute().",
+    "tags": [
+      "CleanArchitecture",
+      "Architecture"
+    ],
+    "quantifierXPathQuery": [
+      "//src:unit/src:class[contains(src:name/text(),\"UseCase\")]"
+    ],
+    "constraintXPathQuery": [
+      "//src:unit/src:class[contains(src:name/text(),\"UseCase\") and src:block/src:function[src:name/text()=\"execute\"]]"
+    ],
+    "checkForFilesFolders": [
+      "src/com/android/architecture/domain/usecase"
+    ],
+    "checkForFilesFoldersConstraints": "INCLUDE",
+    "processFilesFolders": "WITHIN"
+  },
+  {
+    "index": "8",
+    "title": "ViewModels must not make direct network calls",
+    "description": "IF a class extends ViewModel\nTHEN it must not contain fields of type Retrofit, OkHttpClient, or HttpURLConnection.\nViewModels are part of the presentation layer and should not contain networking logic. Direct network calls in ViewModels violate separation of concerns, make testing difficult, and tightly couple UI logic to network implementation. The fix requires: (1) creating or using a Repository class, (2) moving all network-related fields and logic into the Repository, (3) injecting the Repository into the ViewModel, (4) replacing direct network calls with Repository method calls, and (5) updating error handling to work through the Repository abstraction.",
+    "tags": [
+      "Networking",
+      "ViewModel",
+      "Repository",
+      "Architecture"
+    ],
+    "quantifierXPathQuery": [
+      "//src:unit/src:class[src:super/src:extends/src:name/text()=\"ViewModel\"]"
+    ],
+    "constraintXPathQuery": [
+      "//src:unit/src:class[src:super/src:extends/src:name/text()=\"ViewModel\" and not(src:block/src:decl_stmt/src:decl/src:type/src:name[text()=\"Retrofit\" or text()=\"OkHttpClient\" or text()=\"HttpURLConnection\"])]"
+    ],
+    "checkForFilesFolders": [
+      "src/com/android/architecture/viewmodel"
+    ],
+    "checkForFilesFoldersConstraints": "INCLUDE",
+    "processFilesFolders": "WITHIN"
+  }
+]

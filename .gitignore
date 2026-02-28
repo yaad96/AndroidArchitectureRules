@@ -1,0 +1,16 @@
+*.class
+*.jar
+*.war
+*.ear
+*.log
+.idea/
+*.iml
+.DS_Store
+Thumbs.db
+node_modules/
+.vscode/
+.claude/
+LearningDR/
+tempResultXmlFile.xml
+tempExprFile.java
+temptestfile.java
