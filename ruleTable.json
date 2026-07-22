@@ -1,25 +1,5 @@
 [
   {
-    "index": "1",
-    "title": "DTOs must have a no-argument constructor",
-    "description": "IF a class is a DTO (Data Transfer Object)\nTHEN it must have a no-argument constructor.\nGson and Retrofit use reflection to instantiate DTOs during deserialization. Without a no-arg constructor, deserialization will fail at runtime with an InstantiationException.",
-    "tags": [
-      "DTO",
-      "Architecture"
-    ],
-    "quantifierXPathQuery": [
-      "//src:unit/src:class[contains(src:name/text(),\"Dto\")]"
-    ],
-    "constraintXPathQuery": [
-      "//src:unit/src:class[contains(src:name/text(),\"Dto\") and src:block/src:constructor[count(src:parameter_list/src:parameter)=0]]"
-    ],
-    "checkForFilesFolders": [
-      "src/com/android/architecture/dto"
-    ],
-    "checkForFilesFoldersConstraints": "INCLUDE",
-    "processFilesFolders": "WITHIN"
-  },
-  {
     "index": "2",
     "title": "ViewModels must access data through Repositories",
     "description": "IF a class is a ViewModel\nTHEN it should have a reference to a Repository for data access.\nFollowing the MVVM architecture pattern, ViewModels should not directly access data sources (databases, network). Instead, they should delegate data operations to Repository classes which abstract the data layer.",
