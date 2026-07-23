@@ -8,10 +8,6 @@ import java.util.List;
 
 /**
  * ViewModel for User-related UI data.
- * COMPLIANT: Rule 2 - Uses Repository pattern for data access.
- * COMPLIANT: Rule 4 - Does not hold Activity or Context references.
- * COMPLIANT: Rule 6 - MutableLiveData is private, exposed as immutable LiveData.
- * COMPLIANT: Rule 8 - No direct network client references.
  */
 public class UserViewModel extends ViewModel {
     private UserRepository userRepository;

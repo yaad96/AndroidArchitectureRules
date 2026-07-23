@@ -5,7 +5,6 @@ import androidx.room.PrimaryKey;
 
 /**
  * Room Entity for User table.
- * COMPLIANT: Has @Entity annotation and @PrimaryKey field.
  */
 @Entity
 public class UserEntity {

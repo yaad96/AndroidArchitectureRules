@@ -4,7 +4,6 @@ import androidx.room.Entity;
 
 /**
  * Room Entity for Cart table.
- * VIOLATION: Has @Entity annotation but is missing @PrimaryKey field.
  */
 @Entity
 public class CartEntity {

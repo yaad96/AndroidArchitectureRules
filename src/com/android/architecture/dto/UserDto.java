@@ -9,7 +9,6 @@ public class UserDto {
     private String name;
     private String email;
 
-    // No-argument constructor required for Gson/Retrofit deserialization
     public UserDto() {
     }
 

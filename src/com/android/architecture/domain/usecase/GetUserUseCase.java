@@ -5,7 +5,6 @@ import java.util.List;
 
 /**
  * Use Case for retrieving a user by ID.
- * COMPLIANT: Rule 7 - Has a single execute() method as the entry point.
  */
 public class GetUserUseCase {
     private UserRepository userRepository;

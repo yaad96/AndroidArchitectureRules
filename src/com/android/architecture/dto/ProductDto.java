@@ -9,7 +9,6 @@ public class ProductDto {
     private String productName;
     private double price;
 
-    // No-argument constructor required for Gson/Retrofit deserialization
     public ProductDto() {
     }
 

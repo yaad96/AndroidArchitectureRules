@@ -17,17 +17,6 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * ViewModel for Search functionality.
- * COMPLIANT: Rule 2 - Has a Repository reference.
- * COMPLIANT: Rule 4 - Does not hold Activity or Context references.
- * COMPLIANT: Rule 6 - MutableLiveData is private.
- * VIOLATION: Rule 8 - Contains Retrofit and OkHttpClient fields directly.
- *   ViewModels should not hold network clients. All network access should go
- *   through the Repository layer. To fix this, you must:
- *   (1) Move Retrofit and OkHttpClient into a dedicated ApiService or Repository class
- *   (2) Create proper API interface definitions
- *   (3) Inject the Repository instead of the network clients
- *   (4) Replace all direct network calls with Repository method calls
- *   (5) Handle error mapping in the Repository rather than the ViewModel
  */
 public class SearchViewModel extends ViewModel {
     private ProductRepository productRepository;
@@ -59,7 +48,6 @@ public class SearchViewModel extends ViewModel {
 
     public void searchProducts(String query) {
         isLoading.setValue(true);
-        // Direct network call in ViewModel - violates separation of concerns
         ApiService service = retrofit.create(ApiService.class);
         Call<List<Object>> call = service.search(query);
         call.enqueue(new Callback<List<Object>>() {
@@ -80,7 +68,6 @@ public class SearchViewModel extends ViewModel {
     }
 
     public void searchLocal(String query) {
-        // This part correctly uses the repository
         List<Object> localResults = productRepository.getAllProducts();
         searchResults.setValue(localResults);
     }

@@ -83,7 +83,7 @@
   {
     "index": "6",
     "title": "LiveData must not be exposed as MutableLiveData",
-    "description": "IF a class extends ViewModel and has a public or protected field of type MutableLiveData\nTHEN it violates encapsulation.\nViewModels should expose data as immutable LiveData to observers (Activities/Fragments). The mutable version (MutableLiveData) should be kept private. This prevents UI components from accidentally modifying data they should only observe. The fix requires: (1) making the MutableLiveData field private, (2) adding a separate public LiveData getter that returns the private field, and (3) updating all external references.",
+    "description": "IF a class extends ViewModel\nTHEN its MutableLiveData fields must not be public or protected.\nA ViewModel owns the data it holds and is the only component permitted to change it. Activities and Fragments observe that data, and exposing the mutable MutableLiveData type to them allows a UI component to overwrite state it should only be reading. Keeping the mutable holder private and publishing it as immutable LiveData preserves a single writer for each value.",
     "tags": [
       "LiveData",
       "ViewModel",
@@ -104,7 +104,7 @@
   {
     "index": "7",
     "title": "Use Cases must have a single execute() method",
-    "description": "IF a class is a Use Case (name contains 'UseCase')\nTHEN it must have an execute() method.\nFollowing Clean Architecture, each Use Case (Interactor) encapsulates exactly one piece of business logic. The entry point should be a clearly named execute() method. The fix requires: (1) identifying the business logic scattered across multiple public methods, (2) consolidating it into a single execute() method, (3) making helper methods private, and (4) updating all callers to use execute().",
+    "description": "IF a class is a Use Case (name contains 'UseCase')\nTHEN it must have an execute() method.\nIn Clean Architecture each Use Case, or Interactor, encapsulates exactly one piece of business logic. Callers reach that logic through a single named entry point, so a Use Case presents one behaviour to the layers above it rather than a collection of loosely related public methods whose calling order the caller must know.",
     "tags": [
       "CleanArchitecture",
       "Architecture"
@@ -124,7 +124,7 @@
   {
     "index": "8",
     "title": "ViewModels must not make direct network calls",
-    "description": "IF a class extends ViewModel\nTHEN it must not contain fields of type Retrofit, OkHttpClient, or HttpURLConnection.\nViewModels are part of the presentation layer and should not contain networking logic. Direct network calls in ViewModels violate separation of concerns, make testing difficult, and tightly couple UI logic to network implementation. The fix requires: (1) creating or using a Repository class, (2) moving all network-related fields and logic into the Repository, (3) injecting the Repository into the ViewModel, (4) replacing direct network calls with Repository method calls, and (5) updating error handling to work through the Repository abstraction.",
+    "description": "IF a class extends ViewModel\nTHEN it must not contain fields of type Retrofit, OkHttpClient, or HttpURLConnection.\nViewModels belong to the presentation layer and hold no networking logic. A network client inside a ViewModel binds UI state to one transport implementation, leaves the ViewModel untestable without a live server, and bypasses the data layer that already abstracts remote and local sources behind a Repository.",
     "tags": [
       "Networking",
       "ViewModel",

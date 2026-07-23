@@ -4,7 +4,6 @@ import androidx.room.Entity;
 
 /**
  * Room Entity for Review table.
- * VIOLATION: Has @Entity annotation but is missing @PrimaryKey field.
  */
 @Entity
 public class ReviewEntity {

@@ -5,7 +5,6 @@ import androidx.room.Dao;
 
 /**
  * Data Access Object for Product operations.
- * COMPLIANT: Has the @Dao annotation required by Room.
  */
 @Dao
 public interface ProductDao {

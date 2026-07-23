@@ -5,7 +5,6 @@ import java.util.List;
 
 /**
  * Use Case for retrieving products.
- * COMPLIANT: Rule 7 - Has a single execute() method as the entry point.
  */
 public class GetProductUseCase {
     private ProductRepository productRepository;
