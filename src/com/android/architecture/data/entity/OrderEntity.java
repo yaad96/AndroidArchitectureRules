@@ -1,5 +1,7 @@
 package com.android.architecture.data.entity;
 
+import androidx.room.Entity;
+
 /**
  * Room Entity for Order table.
  * VIOLATION: Has @Entity annotation but is missing @PrimaryKey field.

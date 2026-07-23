@@ -1,5 +1,8 @@
 package com.android.architecture.data.entity;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 /**
  * Room Entity for Product table.
  * COMPLIANT: Has @Entity annotation and @PrimaryKey field.

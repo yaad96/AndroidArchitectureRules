@@ -1,6 +1,11 @@
 package com.android.architecture.viewmodel;
 
 import com.android.architecture.repository.ProductRepository;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import android.content.Context;
+import java.util.List;
 
 /**
  * ViewModel for Product-related UI data.

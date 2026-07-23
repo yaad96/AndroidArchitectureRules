@@ -1,6 +1,10 @@
 package com.android.architecture.viewmodel;
 
 import com.android.architecture.repository.UserRepository;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import java.util.List;
 
 /**
  * ViewModel for User-related UI data.

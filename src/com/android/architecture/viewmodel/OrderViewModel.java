@@ -1,5 +1,9 @@
 package com.android.architecture.viewmodel;
 
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.MutableLiveData;
+import java.util.List;
+
 /**
  * ViewModel for Order-related UI data.
  * VIOLATION: Rule 2 - Directly accesses data without going through a Repository.

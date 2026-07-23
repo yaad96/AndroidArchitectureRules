@@ -93,7 +93,7 @@
       "//src:unit/src:class[src:super/src:extends/src:name/text()=\"ViewModel\"]"
     ],
     "constraintXPathQuery": [
-      "//src:unit/src:class[src:super/src:extends/src:name/text()=\"ViewModel\" and not(src:block/src:decl_stmt/src:decl[src:type/src:name[text()=\"MutableLiveData\"] and (src:specifier/text()=\"public\" or src:specifier/text()=\"protected\")])]"
+      "//src:unit/src:class[src:super/src:extends/src:name/text()=\"ViewModel\" and not(src:block/src:decl_stmt/src:decl[src:type/descendant-or-self::src:name[text()=\"MutableLiveData\"] and (src:specifier/text()=\"public\" or src:specifier/text()=\"protected\")])]"
     ],
     "checkForFilesFolders": [
       "src/com/android/architecture/viewmodel"

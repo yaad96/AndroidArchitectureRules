@@ -1,6 +1,7 @@
 package com.android.architecture.data.dao;
 
 import java.util.List;
+import androidx.room.Dao;
 
 /**
  * Data Access Object for User operations.
